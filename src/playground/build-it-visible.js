@@ -12,8 +12,6 @@ class VisibilityToggle extends React.Component {
                 visibility: !prevState.visibility
             }
         })
-        // this.visibility = !this.visibility
-        // this.visibility ? this.buttonLabel = 'Show details' : this.buttonLabel = 'Hide details'
     }
     render() {
         return (
