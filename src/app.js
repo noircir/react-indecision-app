@@ -1,45 +1,74 @@
-console.log('App.js is running!')
+class IndecisionApp extends React.Component {
+    render() {
+        const title = 'Decision maker'
+        const subtitle = 'Put your life in the hands of a computer'
+        const options = ['Thing one', 'Thing two', 'Thing four']
 
-// JSX - JavaScript XML
-const app = {
-    title: 'Indecision App',
-    subtitle: 'Put your life in the hands of a computer',
-    options: ['One', 'Two']
+        return (
+            <div>
+                <Header title={title} subtitle={subtitle}/>
+                <Action />
+                <Options options={options}/>
+                <AddOption />
+            </div>
+        )
+    }
 }
 
-const template = (
-    <div>
-        <h1>{app.title}</h1>
-        {app.subtitle && <p>{app.subtitle}</p>}
-        <p>{app.options.length > 0 ? 'Here are your options: ' : 'No options'}</p>
-        <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-        </ol>
-    </div>
-)
 
-const user = {
-    name: 'Mike',
-    age: 19,
-    location: 'Singapore'
+class Header extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
+            </div>
+        )
+    }
 }
 
-function getLocation(location) {
-    return location ? <p>Location: {location}</p> : undefined
+class Action extends React.Component {
+    render() {
+        return (
+            <div>
+                <button>What should I do?</button>
+            </div>
+        )
+            
+    }
 }
 
-// Tertiary operator for choosing one or the other. 
-// Logical AND operator for choosing one or nothing.
+class Options extends React.Component {
+    render() {
+        return (
+            <div>
+                {
+                    this.props.options.map((option) => <Option key={option} optionText={option}/>)
+                }
+            </div>
+        )
+    }
 
-const templateTwo = (
-    <div>
-        <h1>{user.name ? user.name : 'Anonymous'}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
-    </div>
-)
+}
 
-const appRoot = document.getElementById('app')
+class Option extends React.Component {
+    render() {
+        return (
+            <div>
+                <h3>Option: {this.props.optionText}</h3>
+            </div>
+        )
+    }
+}
 
-ReactDOM.render(template, appRoot);
+class AddOption extends React.Component {
+    render() {
+        return (
+            <div>
+                <button>Add an option</button>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
