@@ -1,3 +1,15 @@
+// const obj = {
+//     name: 'Susan',
+//     getName() {
+//         return this.name
+//     }
+// }
+// // binding gets lost here
+// const getName = obj.getName.bind({name: 'Dmitri'})
+// console.log(getName())
+// console.log(obj.getName())
+
+
 class IndecisionApp extends React.Component {
     render() {
         const title = 'Decision maker'
@@ -28,23 +40,33 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+    handlePick() {
+        alert('handlePick')
+    }
     render() {
         return (
             <div>
-                <button>What should I do?</button>
+                <button onClick={this.handlePick}> What should I do?</button>
             </div>
         )
-            
     }
 }
 
 class Options extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleRemoveAll = this.handleRemoveAll.bind(this)
+    }
+    handleRemoveAll() {
+        console.log(this.props.options)
+    }
     render() {
         return (
             <div>
                 {
                     this.props.options.map((option) => <Option key={option} optionText={option}/>)
                 }
+                <button onClick={this.handleRemoveAll}>Remove All</button>
             </div>
         )
     }
@@ -62,10 +84,22 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+    handleAddOption(e) {
+        e.preventDefault()
+        const option = e.target.elements.option.value.trim()
+        console.log(option)
+        if (option) {
+            alert(option)
+            e.target.elements.option.value = ''
+        }
+    }
     render() {
         return (
             <div>
-                <button>Add an option</button>
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="option" />
+                    <button>Add Option</button>
+                </form>
             </div>
         )
     }
