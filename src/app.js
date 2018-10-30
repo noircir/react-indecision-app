@@ -79,19 +79,38 @@ class Header extends React.Component {
     }
 }
 
-class Action extends React.Component {
-    render() {
-        return (
-            <div>
-                <button onClick={this.props.handlePick}
-                disabled={!this.props.hasOptions}
-                >
-                    What should I do?
-                </button>
-            </div>
-        )
-    }
+// This function Action overrides the class's Action, so no 'this' pointers. 
+// The properties are passed the same way they would be passed to the class constructor. 
+
+// Lower-case letter: jsx will assume HTML element, 
+// upper-case letter:jsx will look for variable in scope. 
+// The same is true with stateless components.
+
+const Action = (props) => {
+    return (
+        <div>
+            <button onClick={props.handlePick}
+                disabled={!props.hasOptions}
+            >
+                What should I do?
+            </button>
+        </div>
+    )
 }
+
+// class Action extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <button onClick={this.props.handlePick}
+//                 disabled={!this.props.hasOptions}
+//                 >
+//                     What should I do?
+//                 </button>
+//             </div>
+//         )
+//     }
+// }
 
 class Options extends React.Component {
     render() {
@@ -149,4 +168,22 @@ class AddOption extends React.Component {
     }
 }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+// Stateless functional components (simple presentational componenets)
+// 1. faster
+// 2. easier to read and write
+// 3. easier to test
+
+// const User = (props) => {
+//     return (
+//         <div>
+//             <p>Name: {props.name}</p>
+//             <p>Age: {props.age}</p>
+//         </div>
+//     )
+// }
+
+// lower-case letter: jsx will assume HTML element, 
+// upper-case letter:jsx will look for variable in scope. 
+// The same is true with stateless componenets 
+
+ReactDOM.render(<IndecisionApp/>, document.getElementById('app'))
